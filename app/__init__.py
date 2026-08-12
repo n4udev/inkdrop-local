@@ -1,0 +1,1 @@
+"""Inkdrop Local web application."""

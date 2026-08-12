@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert documents to Markdown locally.">
+  <title>Inkdrop Local</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="card" aria-labelledby="wordmark">
+    <header class="card-header">
+      <span class="wordmark" id="wordmark">inkdrop</span>
+      <div class="header-actions"><span class="local-caption">local only</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">☼</button></div>
+    </header>
+    <p class="attribution">Inspired by Markdown · powered by <a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener noreferrer">Microsoft MarkItDown</a></p>
+
+    <section id="uploadState" class="state" aria-label="Upload a document">
+      <label class="drop-zone" id="dropZone" tabindex="0" for="fileInput">
+        <input id="fileInput" type="file" accept=".pdf,.docx,.pptx,.xlsx,.html,.htm,.txt,.md,.csv,.json,.xml,.jpg,.jpeg,.png">
+        <span class="drop-title">Drop a document here</span>
+        <span class="drop-or">or</span>
+        <span class="primary choose-button">Choose a file</span>
+      </label>
+      <p class="format-caption">pdf · docx · pptx · xlsx · html · txt · md · csv · json · xml · jpg · png · 50 MB max</p>
+      <p class="limit-caption">Images and scanned PDFs: text extraction is limited — no OCR.</p>
+    </section>
+
+    <section id="convertingState" class="state converting" aria-live="polite" hidden>
+      <div class="progress-track" aria-hidden="true"><span></span></div>
+      <p class="converting-name" id="convertingName"></p>
+      <p class="limit-caption">Large files can take a moment</p>
+    </section>
+
+    <section id="resultState" class="state result" aria-live="polite" hidden>
+      <div class="result-header">
+        <div><strong id="outputName"></strong><span id="resultStats" class="stats"></span></div>
+        <div class="result-actions"><button class="outline" id="copyButton" type="button">Copy</button><button class="primary" id="downloadButton" type="button">Download .md</button></div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Result views">
+        <button class="tab active" id="previewTab" type="button" role="tab" aria-selected="true" aria-controls="previewPanel" tabindex="0">Preview</button>
+        <button class="tab" id="markdownTab" type="button" role="tab" aria-selected="false" aria-controls="markdownPanel" tabindex="-1">Markdown</button>
+      </div>
+      <div class="result-panel" id="previewPanel" role="tabpanel" aria-labelledby="previewTab"><article id="preview"></article></div>
+      <pre class="result-panel markdown-panel" id="markdownPanel" role="tabpanel" aria-labelledby="markdownTab" hidden><code id="markdownSource"></code></pre>
+      <p class="large-notice" id="largeNotice" hidden>Preview disabled for large results — showing raw Markdown</p>
+      <div class="result-footer"><button class="outline" id="anotherButton" type="button">Convert another file</button></div>
+    </section>
+
+    <section id="errorState" class="state error-state" role="alert" aria-live="polite" hidden>
+      <p id="errorMessage"></p><button class="primary" id="retryButton" type="button">Try again</button>
+    </section>
+    <p class="sr-status" id="status" aria-live="polite"></p>
+  </main>
+  <script src="/static/vendor/marked.min.js"></script>
+  <script src="/static/vendor/purify.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

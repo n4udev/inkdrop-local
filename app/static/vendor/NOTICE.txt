@@ -1,0 +1,16 @@
+Offline browser dependencies
+
+marked.min.js
+  Marked 15.0.12 — MIT License
+  https://github.com/markedjs/marked
+  Full license: licenses/marked-15.0.12-LICENSE.md
+
+purify.min.js
+  DOMPurify 3.2.6 — Apache-2.0 OR MPL-2.0
+  https://github.com/cure53/DOMPurify
+  Full license: licenses/DOMPurify-3.2.6-LICENSE
+
+Both distributions are vendored so the local-only interface makes no CDN requests.
+
+The repository-level MIT License applies only to Inkdrop Local's original code.
+It does not replace or modify these third-party license terms.

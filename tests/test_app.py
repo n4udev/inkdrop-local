@@ -1,4 +1,8 @@
+import io
+
 from fastapi.testclient import TestClient
+import pytest
+from markitdown import MarkItDown
 
 from app.main import app
 
@@ -34,6 +38,17 @@ def test_csv_conversion_returns_markdown():
     )
     assert response.status_code == 200
     assert "Ada" in response.json()["markdown"]
+
+
+def test_undecodable_text_and_csv_do_not_become_literal_none():
+    converter = MarkItDown(enable_plugins=False)
+    data = b"\xff\xfe\xff\xff\x00"
+
+    text = converter.convert_stream(io.BytesIO(data), file_extension=".txt").text_content
+    csv = converter.convert_stream(io.BytesIO(data), file_extension=".csv").text_content
+
+    assert text != "None"
+    assert csv != "| None |\n| --- |"
 
 
 def test_html_conversion_returns_content():
